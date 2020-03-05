@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nginx:
+    build: ./image/nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+  mysql:
+    build: ./image/mysql
+    container_name: mysql
+  wordpress:
+    depends_on:
+      - mysql
+    build: ./image/wordpress
+    container_name: wordpress
+    ports:
+      - "5050:5050"
+    # volumes:
+    #   - wordpress:/var/www/html
+  phpmyadmin:
+    depends_on:
+      - mysql
+    build: ./image/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "5000:5000"
+  influxdb:
+    build: ./image/influxdb
+    container_name: influxdb
+  grafana:
+    depends_on:
+      - influxdb
+    build: ./image/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+  ftps:
+    build: ./image/ftps
+    container_name: ftps
+    ports:
+      - "21:21"
