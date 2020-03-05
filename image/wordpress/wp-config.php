@@ -36,8 +36,8 @@ if (!empty($_ENV['DB_PASSWORD']))
 if (!empty($_ENV['DB_HOST']))
 	define( 'DB_HOST', $_ENV['DB_HOST'] );
 
-define('WP_HOME', 'http://IP192.168.99.116:5050' );
-define('WP_SITEURL', 'http://IP192.168.99.116:5050' );
+define('WP_HOME', 'http://IP:5050' );
+define('WP_SITEURL', 'http://IP:5050' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

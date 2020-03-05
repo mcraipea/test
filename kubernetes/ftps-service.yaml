@@ -5,6 +5,8 @@ metadata:
   labels:
     app: ftps-app
 spec:
+  selector:
+    app: ftps-app
   ports:
   - port: 21
     protocol: TCP
@@ -12,8 +14,6 @@ spec:
   - port: 21000
     protocol: TCP
     name: ftps-data
-  selector:
-    app: ftps-app
   type: LoadBalancer
 ---
 apiVersion: v1

@@ -5,11 +5,10 @@ metadata:
   labels:
     app: ftps-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: ftps-app
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:

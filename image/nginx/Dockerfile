@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.10
 
 RUN apk update && apk add nginx \
 && apk add --no-cache --upgrade bash \
@@ -19,10 +19,10 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY id_rsa_key_ssh /etc/ssh/ssh_host_rsa_key
 COPY ./sshd.config /etc/ssh/
 
-COPY start_nginx.sh /start_nginx.sh
+COPY start_nginx.sh .
 
 RUN chmod +x start_nginx.sh
 RUN chmod 600 /etc/ssh/ssh_host_rsa_key
 
 EXPOSE 80 443
-CMD ["/start_nginx.sh"]
+CMD ./start_nginx.sh

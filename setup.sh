@@ -17,12 +17,12 @@ ft_service()
 	sleep 1
 }
 
+#start docker
+echo "N" | bash init_docker.sh
 #enlever minikube si il existe deja
 minikube delete
 #start minikube avec 4cpu et virtualbox en driver, v=7 pour verbose les infos et erreurs
 minikube start --v=7 --cpus 4 --memory 8192 --vm-driver=virtualbox
-#start docker
-echo "N" | bash init_docker.sh
 
 #Mettre l' IP dans les fichiers de configs (creation de .bak)
 server_ip=`minikube ip`
