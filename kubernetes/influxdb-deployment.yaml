@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb-deployment
+  name: influxdb
   labels:
-    app: influxdb-app
+    app: influxdb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: influxdb-app
+      app: influxdb
   template:
     metadata:
       labels:
-        app: influxdb-app
+        app: influxdb
     spec:
       containers:
       - name: influxdb
@@ -23,6 +23,13 @@ spec:
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
+        env:
+        - name: INFLUXDB_DB
+          value: influxdb
+        - name: INFLUXDB_USER
+          value: admin
+        - name: INFLUXDB_PASSWORD
+          value: admin
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:

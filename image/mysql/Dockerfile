@@ -6,10 +6,13 @@ RUN apk update \
 
 COPY ./start_mysql.sh .
 COPY ./init_mysql.sh .
+COPY ./my.cnf /etc/mysql/my.cnf
 COPY wp.sql .
 
 RUN chmod 777 start_mysql.sh
 RUN chmod 777 init_mysql.sh
+
+VOLUME ["/var/lib/mysql"]
 
 EXPOSE 3306
 

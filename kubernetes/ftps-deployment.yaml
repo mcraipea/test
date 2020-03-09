@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps-deployment
+  name: ftps
   labels:
-    app: ftps-app
+    app: ftps
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ftps-app
+      app: ftps
   template:
     metadata:
       labels:
-        app: ftps-app
+        app: ftps
     spec:
       containers:
       - name: ftps

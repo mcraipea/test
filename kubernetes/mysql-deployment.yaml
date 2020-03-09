@@ -1,28 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
   labels:
-    app: mysql-app
+    app: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql-app
+      app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: mysql-app
+        app: mysql
     spec:
+      restartPolicy: Always
       containers:
       - name: mysql
         image: services/mysql
         env:
           - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysql-secrets
-                key: root-password
+            value: admin
+          - name: MYSQL_DATABASE
+            value: wordpress
+          - name: MYSQL_USER
+            value: admin
+          - name: MYSQL_PASSWORD
+            value: admin
         ports:
         - containerPort: 3306
         imagePullPolicy: Never

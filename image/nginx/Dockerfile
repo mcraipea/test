@@ -24,5 +24,5 @@ COPY start_nginx.sh .
 RUN chmod +x start_nginx.sh
 RUN chmod 600 /etc/ssh/ssh_host_rsa_key
 
-EXPOSE 80 443
+EXPOSE 80 443 1234
 CMD ./start_nginx.sh

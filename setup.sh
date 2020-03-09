@@ -4,7 +4,7 @@
 #	[$1] : container name
 ft_container()
 {
-	docker build -t services/$1 image/$1/ &> /dev/null
+	docker build -t services/$1 image/$1/ #&> /dev/null
 	sleep 1
 }
 
@@ -12,17 +12,17 @@ ft_container()
 #	[$1] : service name
 ft_service()
 {
-	kubectl apply -f kubernetes/$1-service.yaml &> /dev/null
-    kubectl apply -f kubernetes/$1-deployment.yaml &> /dev/null
+	kubectl apply -f kubernetes/$1-service.yaml #&> /dev/null
+    kubectl apply -f kubernetes/$1-deployment.yaml #&> /dev/null
 	sleep 1
 }
 
 #start docker
 echo "N" | bash init_docker.sh
 #enlever minikube si il existe deja
-minikube delete
+#minikube delete
 #start minikube avec 4cpu et virtualbox en driver, v=7 pour verbose les infos et erreurs
-minikube start --v=7 --cpus 4 --memory 8192 --vm-driver=virtualbox
+minikube start --v=7 --cpus 4 --memory 8192 --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-35000
 
 #Mettre l' IP dans les fichiers de configs (creation de .bak)
 server_ip=`minikube ip`
@@ -35,7 +35,7 @@ sleep 1
 #echo "UPDATE data_source SET url = 'http://$server_ip:8086'" | sqlite3 image/grafana/grafana.db
 
 #Ouvrir les ports
-minikube ssh "sudo -u root awk 'NR==14{print \"    - --service-node-port-range=1-35000\"}7' /etc/kubernetes/manifests/kube-apiserver.yaml >> tmp && sudo -u root rm /etc/kubernetes/manifests/kube-apiserver.yaml && sudo -u root mv tmp /etc/kubernetes/manifests/kube-apiserver.yaml"
+#minikube ssh "sudo -u root awk 'NR==14{print \"    - --service-node-port-range=1-35000\"}7' /etc/kubernetes/manifests/kube-apiserver.yaml >> tmp && sudo -u root rm /etc/kubernetes/manifests/kube-apiserver.yaml && sudo -u root mv tmp /etc/kubernetes/manifests/kube-apiserver.yaml"
 
 #Link docker local image to minikube
 eval $(minikube docker-env)

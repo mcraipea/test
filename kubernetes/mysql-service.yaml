@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: mysql
   labels:
-    app: mysql-app
+    app: mysql
 spec:
   type: NodePort
   ports:
@@ -12,7 +12,7 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: mysql-app
+    app: mysql
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -42,11 +42,3 @@ spec:
   resources:
     requests:
       storage: 2Gi
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-secrets
-type: Opaque
-data:
-  root-password: c3VwZXItc2VjcmV0LXBhc3N3b3Jk

@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: nginx
   labels:
-    app: nginx-app
+    app: nginx
 spec:
   selector:
-    app: nginx-app
+    app: nginx
   ports:
     - name: http
       port: 80
@@ -16,9 +16,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-svc
+  name: nginx
   labels:
-    app: nginx-app
+    app: nginx
 spec:
   type: NodePort
   ports:
@@ -30,4 +30,4 @@ spec:
     protocol: TCP
     name: https
   selector:
-    app: nginx-app
+    app: nginx

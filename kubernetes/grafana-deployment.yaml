@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana-deployment
+  name: grafana
   labels:
-    app: grafana-app
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grafana-app
+      app: grafana
   template:
     metadata:
       labels:
-        app: grafana-app
+        app: grafana
     spec:
       containers:
       - name: grafana
@@ -20,3 +20,14 @@ spec:
         ports:
         - containerPort: 3000
         imagePullPolicy: Never
+        env:
+        - name: INFLUXDB_HOST
+          value: influxdb
+        - name: GF_SERVER_HTTP_PORT
+          value: "3000"
+        - name: GF_AUTH_BASIC_ENABLED
+          value: "false"
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "true"
+        - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+          value: Admin
